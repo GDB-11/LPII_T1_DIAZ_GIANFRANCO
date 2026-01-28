@@ -4,34 +4,27 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    
-    <persistence-unit name="BD1_DiazBadoino_PU" transaction-type="RESOURCE_LOCAL">
+
+    <persistence-unit name="InventarioPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
-        <!-- Entidades JPA -->
-        <class>com.lpii.entity.Categoria</class>
-        <class>com.lpii.entity.Producto</class>
-        <class>com.lpii.entity.Inventario</class>
-        
+        <class>cibertec.com.diaz.badoino.model.Categoria</class>
+        <class>cibertec.com.diaz.badoino.model.Producto</class>
+        <class>cibertec.com.diaz.badoino.model.Inventario</class>
+
         <properties>
-            <!-- Configuración de conexión MariaDB -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/BD1_DiazBadoino?useSSL=false&amp;serverTimezone=America/Lima"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="1234"/>
-            
-            <!-- Configuración de Hibernate -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             
-            <!-- Pool de conexiones -->
-            <property name="hibernate.c3p0.min_size" value="5"/>
-            <property name="hibernate.c3p0.max_size" value="20"/>
-            <property name="hibernate.c3p0.timeout" value="300"/>
-            <property name="hibernate.c3p0.max_statements" value="50"/>
-            <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+            <property name="hibernate.connection.pool_size" value="10"/>
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

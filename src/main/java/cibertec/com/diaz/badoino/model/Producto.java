@@ -1,4 +1,4 @@
-package com.lpii.model;
+package cibertec.com.diaz.badoino.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
