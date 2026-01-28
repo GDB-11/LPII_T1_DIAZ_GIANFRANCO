@@ -1,0 +1,43 @@
+-- Crear y usar la base de datos
+CREATE DATABASE IF NOT EXISTS BD1_DiazBadoino CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE BD1_DiazBadoino;
+
+
+CREATE TABLE categoria (
+    id_cate INT PRIMARY KEY AUTO_INCREMENT,
+    descripcion VARCHAR(100) NOT NULL,
+    frecuencia_compra VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+INSERT INTO categoria (descripcion, frecuencia_compra) VALUES
+('Electrónica', 'Mensual'),
+('Alimentos', 'Semanal'),
+('Ropa', 'Trimestral');
+
+
+CREATE TABLE productos (
+    id_prod INT PRIMARY KEY AUTO_INCREMENT,
+    nom_prod VARCHAR(150) NOT NULL,
+    id_cate INT NOT NULL,
+    stock_actual INT NOT NULL DEFAULT 0,
+    FOREIGN KEY (id_cate) REFERENCES categoria(id_cate) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+INSERT INTO productos (nom_prod, id_cate, stock_actual) VALUES
+('Laptop HP 15', 1, 25),
+('Arroz 1kg', 2, 150),
+('Camisa Polo', 3, 80);
+
+CREATE TABLE inventario (
+    nro_inventario INT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id_prod INT NOT NULL,
+    costo_ingreso DECIMAL(10,2) NOT NULL,
+    motivo_ingreso VARCHAR(200) NOT NULL,
+    FOREIGN KEY (id_prod) REFERENCES productos(id_prod) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+INSERT INTO inventario (id_prod, costo_ingreso, motivo_ingreso) VALUES
+(1, 2500.00, 'Compra inicial de inventario'),
+(2, 3.50, 'Reposición de stock'),
+(3, 45.00, 'Nueva colección temporada');
